@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mana Community Grocery Survey - Apartments & Communities Market Research Form">
+  <title>Mana Community | Grocery Survey & Research Form</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/survey.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Top Bar Navigation -->
+    <header class="top-nav">
+      <div class="brand" id="brand-logo-trigger" title="Mana Community (Click 3 times to open Admin)">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-title">Mana Community</span>
+          <span class="brand-subtitle">Apartments & Communities Grocery Survey</span>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <a href="admin.html" class="nav-admin-link" title="Open Survey Analytics & Responses Dashboard">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="9" y1="21" x2="9" y2="9"></line>
+          </svg>
+          <span>Admin Portal</span>
+          <span id="response-count-badge" class="badge-counter">0</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+      <!-- Form Card -->
+      <section id="form-container" class="card form-card">
+        <!-- Hero Banner Header -->
+        <div class="form-header">
+          <div class="portal-nav-switcher" role="tablist" aria-label="Survey Categories">
+            <button type="button" id="tab-btn-communities" class="portal-tab-btn active" role="tab" aria-selected="true" aria-controls="grocery-survey-form">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span>Communities</span>
+            </button>
+            <button type="button" id="tab-btn-wholesalers" class="portal-tab-btn" role="tab" aria-selected="false" aria-controls="wholesaler-embedded-container">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+              <span>Wholesalers</span>
+            </button>
+          </div>
+
+          <h1 id="hero-title" class="form-title">Apartment Grocery Needs & Preferences</h1>
+          <p id="hero-desc" class="form-desc">
+            We are assessing interest in a direct-from-source, farm-fresh community grocery service offering wholesale pricing and direct delivery for apartment residents. Please share your family's preferences below.
+          </p>
+          <div id="hero-meta-strip" class="meta-strip">
+            <span>⏱️ 2 minutes</span>
+            <span>🔒 Confidential & Community-focused</span>
+            <span>✨ Exclusive community discounts</span>
+          </div>
+
+          <!-- Progress bar -->
+          <div id="survey-progress-wrap" class="progress-wrap">
+            <div class="progress-info">
+              <span>Survey Completion</span>
+              <span id="progress-percent">0%</span>
+            </div>
+            <div class="progress-track">
+              <div id="progress-bar" class="progress-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resident Grocery Survey Form -->
+        <form id="grocery-survey-form" novalidate>
+          <!-- Section 1: Resident & Apartment Identity -->
+          <fieldset class="form-section">
+            <legend class="section-legend">
+              <span class="step-num">1</span>
+              <div>
+                <h2>Apartment & Resident Details</h2>
+                <p>Basic details to identify your community and reach out with updates.</p>
+              </div>
+            </legend>
+
+            <div class="grid-2col">
+              <div class="form-group">
+                <label for="apartment-name" class="form-label required">Name of the Apartment / Community</label>
+                <div class="input-wrap">
+                  <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 21h18M5 21V7l8-4v18M13 21V3l6 4v14"/>
+                  </svg>
+                  <input type="text" id="apartment-name" name="apartmentName" required placeholder="e.g. Prestige Lakeside / Rainbow Vistas / SMR Vinay" list="apartment-suggestions">
+                </div>
+                <datalist id="apartment-suggestions">
+                  <option value="Prestige Lakeside Habitat">
+                  <option value="My Home Bhooja">
+                  <option value="Aparna Sarovar Zenith">
+                  <option value="Rainbow Vistas Rock Garden">
+                  <option value="SMR Vinay City">
+                  <option value="Sobha Dream Acres">
+                  <option value="Godrej Woods">
+                </datalist>
+                <span class="field-error" id="err-apartment-name">Please enter the apartment or community name.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="flat-number" class="form-label">Flat / Block / Unit No. <span class="opt-tag">(Optional)</span></label>
+                <div class="input-wrap">
+                  <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  <input type="text" id="flat-number" name="flatNumber" placeholder="e.g. Block C - 402 / Villa 12">
+                </div>
+              </div>
+            </div>
+
+            <div class="grid-2col">
+              <div class="form-group">
+                <label for="person-name" class="form-label required">Name of the Person</label>
+                <div class="input-wrap">
+                  <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                  <input type="text" id="person-name" name="personName" required placeholder="e.g. Ramesh Sharma / Priya Reddy">
+                </div>
+                <span class="field-error" id="err-person-name">Please enter your name.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-number" class="form-label">Contact / WhatsApp Number <span class="opt-tag">(For updates)</span></label>
+                <div class="input-wrap">
+                  <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                  <input type="tel" id="contact-number" name="contactNumber" placeholder="e.g. 98765 43210">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Section 2: Willingness & Initial Interest -->
+          <fieldset class="form-section">
+            <legend class="section-legend">
+              <span class="step-num">2</span>
+              <div>
+                <h2 class="required-legend">Willingness to Try Community Grocery Service</h2>
+                <p>Are you open to purchasing farm-fresh groceries organized for your community?</p>
+              </div>
+            </legend>
+
+            <div class="radio-card-grid" role="radiogroup">
+              <label class="radio-card">
+                <input type="radio" name="willingness" value="Yes, Definitely" required>
+                <div class="card-content">
+                  <div class="card-icon positive">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <div class="card-text">
+                    <strong>Yes, Definitely</strong>
+                    <span>Eager to try fresh, wholesale-priced community groceries.</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="willingness" value="Maybe / Depends on Price & Quality">
+                <div class="card-content">
+                  <div class="card-icon neutral">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                  </div>
+                  <div class="card-text">
+                    <strong>Maybe / Needs Details</strong>
+                    <span>Interested if quality is higher and prices beat market rates.</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="willingness" value="Not Interested">
+                <div class="card-content">
+                  <div class="card-icon negative">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </div>
+                  <div class="card-text">
+                    <strong>Not at this time</strong>
+                    <span>Currently content with existing grocery arrangements.</span>
+                  </div>
+                </div>
+              </label>
+            </div>
+            <span class="field-error" id="err-willingness">Please select your willingness.</span>
+          </fieldset>
+
+          <!-- Section 3: Current Grocery Habits -->
+          <fieldset class="form-section">
+            <legend class="section-legend">
+              <span class="step-num">3</span>
+              <div>
+                <h2>Current Grocery Habits & Sourcing</h2>
+                <p>Help us understand how and where your household currently shops.</p>
+              </div>
+            </legend>
+
+            <!-- Where family buys groceries -->
+            <div class="form-group">
+              <label class="form-label required">Where does your family usually buy groceries?</label>
+              <div class="options-grid">
+                <label class="checkbox-option">
+                  <input type="checkbox" name="whereBuy" value="Supermarkets / Retail shops">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Supermarkets / Retail shops</strong>
+                    <span class="subtext">DMart, Ratnadeep, Reliance Fresh, Local Kirana store</span>
+                  </div>
+                </label>
+
+                <label class="checkbox-option">
+                  <input type="checkbox" name="whereBuy" value="Online grocery apps">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Online grocery apps</strong>
+                    <span class="subtext">Blinkit, Zepto, BigBasket, Swiggy Instamart, Amazon Fresh</span>
+                  </div>
+                </label>
+
+                <label class="checkbox-option">
+                  <input type="checkbox" name="whereBuy" value="Wholesale markets">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Wholesale markets / Rythu Bazaar</strong>
+                    <span class="subtext">Mandi, APMC yards, local vegetable markets</span>
+                  </div>
+                </label>
+
+                <label class="checkbox-option">
+                  <input type="checkbox" name="whereBuy" value="Combination of sources">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Combination of sources</strong>
+                    <span class="subtext">Veggies local, staples online/supermarket, etc.</span>
+                  </div>
+                </label>
+              </div>
+              <span class="field-error" id="err-where-buy">Please select at least one grocery source.</span>
+            </div>
+
+            <!-- Items they buy -->
+            <div class="form-group">
+              <label class="form-label required">What items does your family regularly buy?</label>
+              <div class="chips-selector" id="items-chips">
+                <label class="chip-item">
+                  <input type="checkbox" name="itemsBought" value="Rice">
+                  <span>🌾 Rice</span>
+                </label>
+                <label class="chip-item">
+                  <input type="checkbox" name="itemsBought" value="Dal">
+                  <span>🥣 Dal</span>
+                </label>
+                <label class="chip-item">
+                  <input type="checkbox" name="itemsBought" value="Pulses">
+                  <span>🫘 Pulses</span>
+                </label>
+                <label class="chip-item">
+                  <input type="checkbox" name="itemsBought" value="Atta">
+                  <span>🌾 Atta</span>
+                </label>
+                <label class="chip-item">
+                  <input type="checkbox" name="itemsBought" value="Grains">
+                  <span>🌽 Grains</span>
+                </label>
+                <label class="chip-item">
+                  <input type="checkbox" name="itemsBought" value="Oil">
+                  <span>🫒 Oil</span>
+                </label>
+                <label class="chip-item">
+                  <input type="checkbox" name="itemsBought" value="Ghee">
+                  <span>🧈 Ghee</span>
+                </label>
+                <label class="chip-item">
+                  <input type="checkbox" name="itemsBought" value="Spices & Masalas">
+                  <span>🌶️ Spices & Masalas</span>
+                </label>
+                <label class="chip-item">
+                  <input type="checkbox" name="itemsBought" value="Cleaning">
+                  <span>🧼 Cleaning</span>
+                </label>
+                <label class="chip-item">
+                  <input type="checkbox" name="itemsBought" value="Snacks">
+                  <span>🍪 Snacks</span>
+                </label>
+              </div>
+              <div class="other-input-inline">
+                <input type="text" id="other-items" name="otherItems" placeholder="Other specific items (e.g. Dry fruits, cold-pressed gingelly oil)...">
+              </div>
+              <span class="field-error" id="err-items-bought">Please pick at least one product category.</span>
+            </div>
+
+            <!-- Direct Wholesale Mandi Items Available for Your Community -->
+            <div class="form-group community-wholesale-showcase-wrap" id="community-wholesale-showcase">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.4rem;">
+                <div>
+                  <h4 style="font-family: var(--font-heading); font-size: 1.02rem; font-weight: 700; color: #0f172a; margin: 0 0 0.25rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                    <span>🌾 Direct Wholesale Mandi Items Available for Your Community</span>
+                    <span class="badge-tag badge-green" style="font-size: 0.72rem; padding: 0.2rem 0.55rem;">Live Mandi Rates</span>
+                  </h4>
+                  <p class="field-help" style="margin: 0; font-size: 0.83rem; color: #64748b;">
+                    These items and benchmark prices are directly quoted by our wholesale Mandi suppliers network. Select the staples your family would purchase at these wholesale rates:
+                  </p>
+                </div>
+                <div id="community-ws-live-count" style="font-size: 0.78rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 0.3rem 0.7rem; border-radius: 20px; border: 1px solid #a7f3d0;">
+                  7 Items Available
+                </div>
+              </div>
+
+              <div id="community-wholesale-items-container" class="community-wholesale-grid">
+                <!-- Dynamically populated from wholesalerItems -->
+              </div>
+            </div>
+
+            <!-- Spending & Frequency 2-col -->
+            <div class="grid-2col">
+              <div class="form-group">
+                <label for="monthly-spending" class="form-label required">Approximate Monthly Grocery Spending</label>
+                <div class="select-wrap">
+                  <select id="monthly-spending" name="monthlySpending" required>
+                    <option value="" disabled selected>Select estimated spending...</option>
+                    <option value="Under ₹3,000">Under ₹3,000 / month</option>
+                    <option value="₹3,000 - ₹6,000">₹3,000 – ₹6,000 / month</option>
+                    <option value="₹6,000 - ₹10,000">₹6,000 – ₹10,000 / month</option>
+                    <option value="₹10,000 - ₹15,000">₹10,000 – ₹15,000 / month</option>
+                    <option value="Above ₹15,000">Above ₹15,000 / month</option>
+                  </select>
+                </div>
+                <span class="field-error" id="err-monthly-spending">Please select your monthly budget range.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="purchase-frequency" class="form-label required">How often do you purchase groceries?</label>
+                <div class="select-wrap">
+                  <select id="purchase-frequency" name="purchaseFrequency" required>
+                    <option value="" disabled selected>Select frequency...</option>
+                    <option value="Daily or Alternate Days">Daily or alternate days (Fresh items)</option>
+                    <option value="2 - 3 Times a Week">2 – 3 times a week</option>
+                    <option value="Once a Week">Once a week (Weekly stock up)</option>
+                    <option value="Bi-weekly or Monthly">Bi-weekly / Monthly bulk buy</option>
+                  </select>
+                </div>
+                <span class="field-error" id="err-purchase-frequency">Please choose your purchase frequency.</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Section 4: Products Desired & Current Pain Points -->
+          <fieldset class="form-section">
+            <legend class="section-legend">
+              <span class="step-num">4</span>
+              <div>
+                <h2>Community Service Fit & Pain Points</h2>
+                <p>Tell us what would make a community grocery model truly valuable for you.</p>
+              </div>
+            </legend>
+
+            <!-- Which products through our service -->
+            <div class="form-group">
+              <label class="form-label required">Which products would you buy through our community service?</label>
+              <p class="field-help">Choose all items you'd prefer to get delivered direct to your community.</p>
+              <div class="options-grid">
+                <label class="checkbox-option">
+                  <input type="checkbox" name="serviceProducts" value="Farm-Fresh Vegetables & Fruits (Direct from farmers)">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Farm-fresh vegetables & fruits</strong>
+                    <span class="subtext">Harvested within 24 hours, zero cold-storage aging</span>
+                  </div>
+                </label>
+
+                <label class="checkbox-option">
+                  <input type="checkbox" name="serviceProducts" value="Monthly Staples Box (Rice, Dal, Atta, Grains)">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Monthly staples & ration box</strong>
+                    <span class="subtext">Bulk unpolished dal, Sona Masoori/Basmati rice, fresh milled atta</span>
+                  </div>
+                </label>
+
+                <label class="checkbox-option">
+                  <input type="checkbox" name="serviceProducts" value="Pure Cold-Pressed Oils & Desi Ghee">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Wood / cold-pressed oils & pure A2 ghee</strong>
+                    <span class="subtext">Unadulterated groundnut, sesame, mustard & cow ghee</span>
+                  </div>
+                </label>
+
+                <label class="checkbox-option">
+                  <input type="checkbox" name="serviceProducts" value="Daily Dairy, Eggs & Bakery Essentials">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Daily dairy, fresh paneer & farm eggs</strong>
+                    <span class="subtext">Natural milk, curd, fresh cottage cheese</span>
+                  </div>
+                </label>
+
+                <label class="checkbox-option">
+                  <input type="checkbox" name="serviceProducts" value="Organic / Pesticide-free Certified Groceries">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>100% pesticide-free / organic items</strong>
+                    <span class="subtext">Clean food with lab-tested traceability</span>
+                  </div>
+                </label>
+              </div>
+              <span class="field-error" id="err-service-products">Please select at least one product category.</span>
+            </div>
+
+            <!-- What problems do they face -->
+            <div class="form-group">
+              <label class="form-label required">What problems or pain points do you face currently?</label>
+              <p class="field-help">Select all that frustrate your current shopping experience.</p>
+              <div class="options-grid">
+                <label class="checkbox-option">
+                  <input type="checkbox" name="problemsFaced" value="High prices and lack of wholesale discounts">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>High prices & inflated retail markups</strong>
+                    <span class="subtext">Paying full retail or platform surge convenience fees</span>
+                  </div>
+                </label>
+
+                <label class="checkbox-option">
+                  <input type="checkbox" name="problemsFaced" value="Poor freshness or degraded quality of vegetables">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Lack of freshness / stale produce</strong>
+                    <span class="subtext">Old stock delivered from dark stores, vegetables spoiling quickly</span>
+                  </div>
+                </label>
+
+                <label class="checkbox-option">
+                  <input type="checkbox" name="problemsFaced" value="Frequent out-of-stock items and missing orders">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Missing items & erratic stock</strong>
+                    <span class="subtext">Items cancelled at last moment or low inventory</span>
+                  </div>
+                </label>
+
+                <label class="checkbox-option">
+                  <input type="checkbox" name="problemsFaced" value="Heavy bag lifting and traffic / checkout lines">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Lifting heavy bags & supermarket queues</strong>
+                    <span class="subtext">Weekend traffic, parking, and long billing lines</span>
+                  </div>
+                </label>
+
+                <label class="checkbox-option">
+                  <input type="checkbox" name="problemsFaced" value="Doubt over food purity and chemicals/pesticides">
+                  <span class="box"></span>
+                  <div class="opt-label">
+                    <strong>Chemicals, waxing, adulteration doubts</strong>
+                    <span class="subtext">Uncertainty about chemicals used in vegetables and staples</span>
+                  </div>
+                </label>
+              </div>
+              <div class="other-input-inline">
+                <input type="text" id="other-problems" name="otherProblems" placeholder="Any other specific problem you face...">
+              </div>
+              <span class="field-error" id="err-problems-faced">Please select at least one problem.</span>
+            </div>
+          </fieldset>
+
+          <!-- Section 5: Delivery & Community Service Preferences -->
+          <fieldset class="form-section">
+            <legend class="section-legend">
+              <span class="step-num">5</span>
+              <div>
+                <h2>Delivery Method & Monthly Subscription</h2>
+                <p>Final details to customize convenience for your building.</p>
+              </div>
+            </legend>
+
+            <!-- Preferred delivery method -->
+            <div class="form-group">
+              <label class="form-label required">Preferred Delivery Method</label>
+              <div class="radio-card-grid two-by-two">
+                <label class="radio-card">
+                  <input type="radio" name="deliveryMethod" value="Direct Doorstep Delivery to Flat" required>
+                  <div class="card-content">
+                    <div class="card-text">
+                      <strong>🚪 Doorstep Delivery</strong>
+                      <span>Directly to your apartment door at a pre-notified time slot.</span>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="radio-card">
+                  <input type="radio" name="deliveryMethod" value="Community Clubhouse / Gate Pick-up Point">
+                  <div class="card-content">
+                    <div class="card-text">
+                      <strong>🏢 Central Community Hub</strong>
+                      <span>Consolidated drop at clubhouse / security desk (lowest cost).</span>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="radio-card">
+                  <input type="radio" name="deliveryMethod" value="Early Morning Slot (6:30 AM - 8:30 AM)">
+                  <div class="card-content">
+                    <div class="card-text">
+                      <strong>🌅 Early Morning Slot</strong>
+                      <span>Delivered before morning cooking (6:30 AM – 8:30 AM).</span>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="radio-card">
+                  <input type="radio" name="deliveryMethod" value="Evening Slot (6:00 PM - 9:00 PM)">
+                  <div class="card-content">
+                    <div class="card-text">
+                      <strong>🌆 Evening Slot</strong>
+                      <span>Delivered after work hours (6:00 PM – 9:00 PM).</span>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <span class="field-error" id="err-delivery-method">Please select your preferred delivery method.</span>
+            </div>
+
+            <!-- Would they try a monthly community grocery service -->
+            <div class="form-group">
+              <label class="form-label required">Would you try a monthly community grocery service?</label>
+              <div class="radio-pill-group">
+                <label class="radio-pill">
+                  <input type="radio" name="tryMonthlyService" value="Definitely Yes" required>
+                  <span>🎉 Definitely Yes</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="tryMonthlyService" value="Yes, if prices are 15-20% lower than retail">
+                  <span>💰 Yes, if 15-20% cheaper</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="tryMonthlyService" value="Interested in a 1-month trial box first">
+                  <span>📦 Want 1-Month Trial Box</span>
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="tryMonthlyService" value="No, prefer buying ad-hoc">
+                  <span>❌ No, prefer ad-hoc</span>
+                </label>
+              </div>
+              <span class="field-error" id="err-monthly-service">Please select your trial preference.</span>
+            </div>
+
+            <!-- Other suggestions -->
+            <div class="form-group">
+              <label for="other-suggestions" class="form-label">Other Suggestions / Specific Brands or Products You Love</label>
+              <textarea id="other-suggestions" name="otherSuggestions" rows="3" placeholder="Tell us about specific rice varieties (e.g. Sona Masoori, Wada Kolam), organic brands, packaging preferences, or payment suggestions..."></textarea>
+            </div>
+          </fieldset>
+
+          <!-- Form Action Buttons -->
+          <div class="form-footer">
+            <button type="button" id="btn-reset" class="btn-secondary">Reset Form</button>
+            <button type="submit" id="btn-submit" class="btn-primary">
+              <span class="btn-text">Submit Survey Response</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <!-- Wholesalers Embedded Form (Shown when Wholesalers tab is selected) -->
+        <div id="wholesaler-embedded-container" class="hidden" style="padding: 1.75rem 2.5rem;">
+          <form id="wholesaler-inpage-form">
+            <!-- Section 1: Vendor Profile -->
+            <div class="ws-section">
+              <div class="ws-section-header">
+                <span class="ws-section-num">1</span>
+                <div>
+                  <h3 class="ws-section-title">Wholesale Firm & Contact Details</h3>
+                </div>
+              </div>
+              <div class="grid-2col">
+                <div class="form-group">
+                  <label class="form-label required" for="ws-in-firm-name">Firm / Business Name</label>
+                  <div class="input-wrap">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    <input type="text" id="ws-in-firm-name" placeholder="e.g. Sri Venkateshwara Grains & Oil Traders" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label required" for="ws-in-person-name">Contact Person & Role</label>
+                  <div class="input-wrap">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <input type="text" id="ws-in-person-name" placeholder="e.g. Ramesh Reddy (Proprietor / Sales)" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label required" for="ws-in-contact-phone">WhatsApp / Phone Number</label>
+                  <div class="input-wrap">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <input type="tel" id="ws-in-contact-phone" placeholder="10-digit mobile number" maxlength="10" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label required" for="ws-in-location">Godown / Market Yard Location</label>
+                  <div class="input-wrap">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <input type="text" id="ws-in-location" placeholder="e.g. Begum Bazaar / Malakpet Gunj / Kattedan / APMC Yard" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: GST Invoicing -->
+            <div class="ws-section">
+              <div class="ws-section-header">
+                <span class="ws-section-num">2</span>
+                <div>
+                  <h3 class="ws-section-title">GST Invoice & Billing Terms</h3>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label required">Can you provide a GST Invoice or Bill?</label>
+                <div class="grid-3col">
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_gst_status" value="Yes, Regular B2B Tax Invoice with Input Tax Credit (ITC)" checked>
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">✅ Regular B2B GST Bill</span>
+                      <span class="ws-card-desc">Proper tax invoice with GSTIN & ITC eligibility for apartment RWA/buying group.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_gst_status" value="Yes, Composition Scheme Bill of Supply">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">📋 Composition Bill</span>
+                      <span class="ws-card-desc">Bill of supply under GST composition scheme.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_gst_status" value="No GST (Delivery Challan / Cash Memo Only)">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">📄 Delivery Challan Only</span>
+                      <span class="ws-card-desc">Cash memo / Delivery challan without formal GST invoicing.</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 0.85rem;">
+                <label class="form-label" for="ws-in-gstin">GSTIN Number (15-Digit GST Number) <span class="opt-tag">(Optional)</span></label>
+                <input type="text" id="ws-in-gstin" placeholder="e.g. 36AAAAA0000A1Z5" maxlength="15" style="text-transform: uppercase;">
+              </div>
+            </div>
+
+            <!-- Section 3: Food products applicable FSSAI details -->
+            <div class="ws-section">
+              <div class="ws-section-header">
+                <span class="ws-section-num">3</span>
+                <div>
+                  <h3 class="ws-section-title">FSSAI Food Safety Compliance</h3>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label required">FSSAI License Status for Food Products</label>
+                <div class="grid-3col">
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_fssai_status" value="Valid Central / State FSSAI License" checked>
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">🛡️ Central / State License</span>
+                      <span class="ws-card-desc">Active 14-digit FSSAI license for food wholesale & storage.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_fssai_status" value="FSSAI Basic Registration">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">📑 Basic Registration</span>
+                      <span class="ws-card-desc">Registered petty food business / Mandi wholesale registration.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_fssai_status" value="In-Process / Excluded Category">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">⏳ In-Process / Applied</span>
+                      <span class="ws-card-desc">Application under review or traded through primary millers' license.</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="grid-2col" style="margin-top: 0.85rem;">
+                <div class="form-group">
+                  <label class="form-label" for="ws-in-fssai-num">14-Digit FSSAI License / Registration No.</label>
+                  <input type="text" id="ws-in-fssai-num" placeholder="e.g. 13621014000123" maxlength="14">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ws-in-fssai-validity">License Expiry / Validity Year</label>
+                  <input type="text" id="ws-in-fssai-validity" placeholder="e.g. 2028 or Valid Active">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Manufacturing/packing date, expiry & Batch Number -->
+            <div class="ws-section">
+              <div class="ws-section-header">
+                <span class="ws-section-num">4</span>
+                <div>
+                  <h3 class="ws-section-title">Manufacturing, Expiry & Batch Details</h3>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label required">Are Manufacturing/Packing Dates and Expiry/Best-Before Dates Printed on Packages?</label>
+                <div class="grid-3col">
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_mfg_expiry" value="Yes, Clearly printed on every retail packet & bag" checked>
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">🏷️ Printed on Every Pack</span>
+                      <span class="ws-card-desc">Batch, mfg date, best-before clearly printed on each retail pouch.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_mfg_expiry" value="Printed on master outer gunny bags / master cartons only">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">📦 Master Outer Bags Only</span>
+                      <span class="ws-card-desc">Bulk sack printed with date; individual inner bags are plain.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_mfg_expiry" value="Unprinted / Hand-tagged upon dispatch">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">🏷️ Tagged on Dispatch</span>
+                      <span class="ws-card-desc">Loose commodities tagged with lot details at delivery point.</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div class="grid-2col" style="margin-top: 0.85rem;">
+                <div class="form-group">
+                  <label class="form-label" for="ws-in-shelf-life">Minimum Remaining Shelf Life Guarantee at Delivery</label>
+                  <select id="ws-in-shelf-life">
+                    <option value="At least 6 months remaining before expiry" selected>At least 6 months remaining</option>
+                    <option value="At least 3 months remaining before expiry">At least 3 months remaining</option>
+                    <option value="Fresh milled / packaged within last 15-30 days">Fresh milled within last 15–30 days</option>
+                    <option value="Standard staple crop shelf life (1 year)">Standard crop shelf life (1 year)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ws-in-batch-sealed">Packaging Type & Seal Integrity</label>
+                  <select id="ws-in-batch-sealed">
+                    <option value="Factory machine-sealed moisture-barrier polythene / woven sacks" selected>Factory machine-sealed woven sacks</option>
+                    <option value="Standard stitched PP gunny bags">Standard stitched PP gunny bags</option>
+                    <option value="Vacuum-sealed / food-grade nitrogen flushed pouches">Vacuum-sealed / Food-grade pouches</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 5: Replacement Guarantee -->
+            <div class="ws-section">
+              <div class="ws-section-header">
+                <span class="ws-section-num">5</span>
+                <div>
+                  <h3 class="ws-section-title">Replacement Guarantee & On-Site Inspection Policy</h3>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label required">What is your replacement guarantee if we find infestation, weevils, or sub-standard grain?</label>
+                <div class="grid-3col">
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_replacement_policy" value="100% Immediate Replacement or Instant Full Refund within 24-48 Hours" checked>
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">⚡ 100% Immediate Replacement</span>
+                      <span class="ws-card-desc">Replaced or refunded within 24-48 hrs with zero cost to apartment.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_replacement_policy" value="Replacement or credit note adjusted against next order delivery">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">🔄 Credit Note on Next Order</span>
+                      <span class="ws-card-desc">Value deducted from invoice of following scheduled delivery.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_replacement_policy" value="No returns accepted once delivery challan is signed">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">⚠️ Final Sale (No Return)</span>
+                      <span class="ws-card-desc">Quality must be accepted on spot at the delivery vehicle.</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <label class="checkbox-card-styled">
+                <input type="checkbox" id="ws-in-inspection-allowed" checked>
+                <span><strong>100% Inspection Allowed:</strong> Society purchase committee / residents are entitled to cut open sample sacks and inspect grain quality before offloading from vehicle.</span>
+              </label>
+            </div>
+
+            <!-- Section 6: Quality Standard, Varieties, Price Quotation & Moisture Guarantee -->
+            <div class="ws-section">
+              <div class="ws-section-header">
+                <span class="ws-section-num">6</span>
+                <div>
+                  <h3 class="ws-section-title">Quality Standards, Varieties & Wholesale Price Quotation</h3>
+                  <p style="font-size: 0.82rem; color: #64748b; margin-top: 0.2rem;">Specify items you can supply, note wholesale mandi prices per unit/bag, and add or customize items.</p>
+                </div>
+              </div>
+
+              <!-- Dynamic Wholesale Rate Card & Item Manager -->
+              <div class="form-group">
+                <div class="rate-card-manager">
+                  <div class="rate-card-top-bar">
+                    <div>
+                      <label class="form-label required" style="margin-bottom: 0.2rem;">Itemized Wholesale Price List (Rate Card)</label>
+                      <p class="field-help" style="margin: 0;">Enter wholesale prices per unit, edit item names, remove or add custom products.</p>
+                    </div>
+                    <button type="button" id="btn-add-ws-item" class="btn-add-item">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      + Add Custom Product
+                    </button>
+                  </div>
+
+                  <!-- Quick Add Popular Items Strip -->
+                  <div class="quick-add-strip">
+                    <span class="quick-add-label">Quick Add:</span>
+                    <div class="quick-add-chips" id="quick-add-chips">
+                      <!-- Rendered dynamically -->
+                    </div>
+                  </div>
+
+                  <!-- Itemized Table -->
+                  <div class="rate-card-table-wrap">
+                    <table class="rate-card-table">
+                      <thead>
+                        <tr>
+                          <th style="min-width: 175px;">Product / Variety Name</th>
+                          <th style="min-width: 120px;">Packaging / Unit</th>
+                          <th style="min-width: 110px;">Price of 1 kg (₹)</th>
+                          <th style="min-width: 125px;">Wholesale Price (₹)</th>
+                          <th style="min-width: 125px;">Wholesale Min Qty</th>
+                          <th style="min-width: 125px;">Bulk Order Price (₹)</th>
+                          <th style="min-width: 125px;">Bulk Order Min Qty</th>
+                          <th style="min-width: 150px;">Quality Grade / Notes</th>
+                          <th style="width: 80px; text-align: center;">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="ws-items-table-body">
+                        <!-- Populated dynamically by survey.js -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="grid-2col">
+                <div class="form-group">
+                  <label class="form-label" for="ws-in-quality-grade">Grains Cleaning & Sortex Quality Grade</label>
+                  <select id="ws-in-quality-grade">
+                    <option value="100% Sortex Cleaned & Double-Polished / Grade A" selected>100% Sortex Cleaned (Grade A)</option>
+                    <option value="Commercial Cleaned / Sortex 98% (Grade B)">Commercial Cleaned / Sortex 98% (Grade B)</option>
+                    <option value="Standard Mandi Average Grade">Standard Mandi Average Grade</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ws-in-moisture-level">Guaranteed Moisture Level in Rice & Dals</label>
+                  <select id="ws-in-moisture-level">
+                    <option value="Under 12% Moisture (Certified Safe Long Storage)" selected>Under 12% Moisture (Safe Storage)</option>
+                    <option value="12% - 14% Standard Commercial Moisture">12% – 14% Standard Commercial Moisture</option>
+                    <option value="Mandi Standard (Not lab-tested)">Mandi Standard (Not lab-tested)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 0.85rem;">
+                <label class="form-label required">Can you provide free sample kits (250g - 500g) for Society committee testing?</label>
+                <div class="grid-3col">
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_samples" value="Yes, Free sample kits delivered to apartment committee" checked>
+                    <div class="ws-card-inner"><span class="ws-card-title">🎁 Free Sample Kits</span><span class="ws-card-desc">Delivered to clubhouse / committee.</span></div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_samples" value="Yes, available for inspection at our godown">
+                    <div class="ws-card-inner"><span class="ws-card-title">🏪 Inspect at Godown</span><span class="ws-card-desc">Available for inspection at Mandi.</span></div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_samples" value="No samples provided">
+                    <div class="ws-card-inner"><span class="ws-card-title">❌ No Samples</span><span class="ws-card-desc">Bulk supply only.</span></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 7: Payment Terms, Quotation & Delivery Terms -->
+            <div class="ws-section">
+              <div class="ws-section-header">
+                <span class="ws-section-num">7</span>
+                <div>
+                  <h3 class="ws-section-title">Payment Terms, Credit, Quotation & Delivery Terms</h3>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label required">Payment Timing Terms</label>
+                <div class="grid-3col">
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_payment_timing" value="Payment upon Delivery (POD) after verification" checked>
+                    <div class="ws-card-inner"><span class="ws-card-title">🚚 Payment on Delivery (POD)</span><span class="ws-card-desc">Settled after goods verification.</span></div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_payment_timing" value="7 to 15 Days Credit Period for RWA / Gated Society">
+                    <div class="ws-card-inner"><span class="ws-card-title">📅 7-15 Days Credit</span><span class="ws-card-desc">Credit facility for registered societies.</span></div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_payment_timing" value="100% Advance Payment before vehicle dispatch">
+                    <div class="ws-card-inner"><span class="ws-card-title">💵 100% Advance</span><span class="ws-card-desc">Payment before vehicle leaves godown.</span></div>
+                  </label>
+                </div>
+              </div>
+              <!-- Payment Modes -->
+              <div class="form-group" style="margin-top: 1rem;">
+                <label class="form-label required">Accepted Payment Modes</label>
+                <div class="chips-selector">
+                  <label class="chip-item"><input type="checkbox" name="ws_in_payment_modes" value="UPI / QR Code (PhonePe, GPay, Paytm)" checked><span>📱 UPI / QR Code</span></label>
+                  <label class="chip-item"><input type="checkbox" name="ws_in_payment_modes" value="Bank Transfer (NEFT / RTGS / IMPS Current A/c)" checked><span>🏦 NEFT / RTGS Transfer</span></label>
+                  <label class="chip-item"><input type="checkbox" name="ws_in_payment_modes" value="Account Payee Cheque" checked><span>📝 Account Payee Cheque</span></label>
+                  <label class="chip-item"><input type="checkbox" name="ws_in_payment_modes" value="Cash on Delivery (Up to legal limits)"><span>💵 Cash on Delivery</span></label>
+                </div>
+              </div>
+
+              <!-- Credit Facility -->
+              <div class="form-group" style="margin-top: 1rem;">
+                <label class="form-label required">Credit Facility Availability</label>
+                <div class="grid-3col">
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_credit_facility" value="Strictly delivery payment initially; 7-15 days credit negotiable after regular monthly volume" checked>
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">🤝 Credit after Relationship</span>
+                      <span class="ws-card-desc">Initial orders spot delivery payment; 7-15 days credit enabled once volume is regular.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_credit_facility" value="Yes, 7 to 10 days credit available with RWA purchase agreement">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">📅 7-10 Days Credit Available</span>
+                      <span class="ws-card-desc">Credit term against formal RWA purchase order & verified society committee.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_credit_facility" value="No credit facility at all (Strictly spot payment on all orders)">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">🚫 Strictly Spot (No Credit)</span>
+                      <span class="ws-card-desc">Best wholesale margins offered on strict 100% spot payment basis.</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Written Quotation -->
+              <div class="form-group" style="margin-top: 1rem;">
+                <label class="form-label required">Can You Provide a Written Quotation or Price List?</label>
+                <div class="grid-3col">
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_written_quotation" value="Yes, Official signed/stamped PDF quotation with itemized rates & validity" checked>
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">📄 Official Stamped PDF</span>
+                      <span class="ws-card-desc">Itemized quotation on letterhead with per-KG / per-bag rates & validity.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_written_quotation" value="Yes, Weekly updated WhatsApp rate card with bulk discounts">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">📲 Weekly WhatsApp Rate Card</span>
+                      <span class="ws-card-desc">Weekly Mandi rates broadcasted directly to community purchasing managers.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_written_quotation" value="Yes, 30-day fixed price contract list for staples">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">📑 30-Day Fixed Rate Contract</span>
+                      <span class="ws-card-desc">Locked price list protecting apartments from daily market fluctuations.</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Written Return Terms -->
+              <div class="form-group" style="margin-top: 1rem;">
+                <label class="form-label required">Are Return and Refund Terms Provided in Writing?</label>
+                <div class="grid-3col">
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_written_returns" value="Yes, Written return/refund terms & SLA provided on company letterhead" checked>
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">📜 Written SLA on Letterhead</span>
+                      <span class="ws-card-desc">Formal signed return terms defining replacement timeline and refund mode.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_written_returns" value="Terms clearly printed on back of the tax invoice">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">🧾 Printed on Tax Invoice</span>
+                      <span class="ws-card-desc">Standard printed return & exchange conditions at bottom of bill.</span>
+                    </div>
+                  </label>
+                  <label class="ws-choice-card">
+                    <input type="radio" name="ws_in_written_returns" value="Custom terms negotiable for society long-term MOU">
+                    <div class="ws-card-inner">
+                      <span class="ws-card-title">🤝 Custom Society MOU Terms</span>
+                      <span class="ws-card-desc">Terms incorporated directly in mutual society procurement agreement.</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="grid-2col" style="margin-top: 0.85rem;">
+                <div class="form-group">
+                  <label class="form-label" for="ws-in-moq">Minimum Order Quantity (MOQ) for Wholesale Rates</label>
+                  <input type="text" id="ws-in-moq" placeholder="e.g. 500 kg minimum or ₹25,000 order value">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ws-in-delivery-radius">Delivery Coverage & Transport Charge</label>
+                  <input type="text" id="ws-in-delivery-radius" placeholder="e.g. Free delivery across Hyderabad / ₹500 flat lorry charge">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ws-in-notes">Current Wholesale Price Quotation / Special Notes</label>
+                <textarea id="ws-in-notes" rows="3" placeholder="Provide current wholesale mandi rates (e.g. Sona Masoori 26kg bag @ ₹1,420, Toor Dal @ ₹138/kg)..."></textarea>
+              </div>
+            </div>
+
+            <!-- Wholesaler Action Buttons -->
+            <div style="display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-light);">
+              <div style="display: flex; gap: 0.85rem; flex-wrap: wrap;">
+                <button type="button" id="btn-submit-wholesaler" class="btn-primary">Submit Wholesaler Quotation</button>
+                <button type="button" id="btn-wa-wholesaler" class="btn-whatsapp">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                  Share on WhatsApp
+                </button>
+              </div>
+              <button type="button" id="btn-print-wholesaler" class="btn-outline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Print Quotation
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Success Screen -->
+      <section id="success-screen" class="card form-card success-card hidden">
+        <div class="success-icon-wrap">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <h2>Thank You for Your Feedback!</h2>
+        <p class="success-subtitle">
+          Your response has been saved for <strong id="success-apartment-name">your apartment</strong>. We are aggregating community demand to bring direct-from-farm wholesale pricing to your community!
+        </p>
+        <div class="success-summary" id="submission-preview-box"></div>
+        <div class="success-actions">
+          <button id="btn-fill-another" class="btn-primary">Fill Another Response</button>
+          <button id="btn-view-data-from-success" class="btn-outline">View Collected Responses</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Mana Community © 2026 • Apartment & Gated Community Hyperlocal Supply Chain Initiative</p>
+    </footer>
+  </div>
+
+  <!-- Admin Toast Notification -->
+  <div id="admin-toast" role="status" aria-live="polite"></div>
+
+  <!-- Firebase Universal SDKs via Google CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics-compat.js"></script>
+
+  <!-- Modular Application Scripts -->
+  <script src="js/turso-config.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/survey.js"></script>
+</body>
+</html>

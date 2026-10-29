@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mana Community Admin Portal - Survey Responses, Analytics & Wholesaler Quotations">
+  <title>Admin Portal | Mana Community Survey & Procurement</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/survey.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+  <!-- Admin Header -->
+  <header class="admin-header">
+    <div class="admin-title-wrap">
+      <div class="admin-logo-badge">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="admin-title">Mana Community • Procurement & Survey Admin</h1>
+        <div class="admin-subtitle">
+          <span>Real-time Operations Dashboard</span>
+          <span class="sync-pill sync-pill-turso" id="turso-sync-pill" title="Turso libSQL Database Connection (https://app.turso.tech/kondareddy)">
+            <span class="sync-dot" id="turso-sync-dot"></span>
+            <span id="turso-sync-label">Turso DB: Ready (kondareddy)</span>
+          </span>
+          <span class="sync-pill" id="cloud-sync-pill" style="display:none;">
+            <span class="sync-dot"></span>
+            Firestore Sync Active
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-actions">
+      <a href="index.html" class="admin-btn admin-btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Survey Form
+      </a>
+      <button id="btn-turso-settings" class="admin-btn admin-btn-turso" title="Configure Turso libSQL Database Connection (kondareddy)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>Turso Database</span>
+      </button>
+      <button id="btn-export-csv" class="admin-btn admin-btn-primary" title="Export current data view to CSV">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span id="export-btn-label">Export CSV</span>
+      </button>
+      <button id="btn-print-report" class="admin-btn admin-btn-print" title="Print procurement report or save as PDF">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Print Report
+      </button>
+      <button id="btn-seed-demo" class="admin-btn admin-btn-secondary" title="Populate sample responses for testing">
+        ✨ Demo Data
+      </button>
+      <button id="btn-clear-all" class="admin-btn admin-btn-danger" title="Clear local survey records">
+        Clear Cache
+      </button>
+    </div>
+  </header>
+
+  <!-- Admin Main Container -->
+  <main class="admin-container">
+    <!-- Quick KPI Metrics Cards -->
+    <section class="stats-grid" aria-label="Key Performance Indicators">
+      <div class="stat-card">
+        <div class="stat-title" id="kpi-title-1">Total Resident Responses</div>
+        <div class="stat-num" id="stat-total">0</div>
+        <div class="stat-desc" id="kpi-desc-1">Apartment demand surveys recorded</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-title" id="kpi-title-2">Willingness / Interest Rate</div>
+        <div class="stat-num" id="stat-willing-pct">0%</div>
+        <div class="stat-desc" id="kpi-desc-2">Residents eager for wholesale groceries</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-title" id="kpi-title-3">Top Spending Bracket</div>
+        <div class="stat-num" id="stat-top-spend">-</div>
+        <div class="stat-desc" id="kpi-desc-3">Median household monthly grocery budget</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-title" id="kpi-title-4">Most Active Community</div>
+        <div class="stat-num" id="stat-top-apartment">-</div>
+        <div class="stat-desc" id="kpi-desc-4">Highest participation rate by community</div>
+      </div>
+    </section>
+
+    <!-- Visual Analytics & Procurement Insights Section -->
+    <section class="analytics-section" id="analytics-section">
+      <div class="analytics-header">
+        <h2 class="analytics-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          Demand Intelligence & Community Sourcing Trends
+        </h2>
+        <span class="detail-label" id="analytics-summary-text">Aggregated across all surveyed households</span>
+      </div>
+
+      <div class="analytics-grid">
+        <!-- Chart 1: Willingness & Buying Intent -->
+        <div class="analytics-card">
+          <div class="analytics-card-title">
+            <span>🎯 Willingness & Trial Intent</span>
+          </div>
+          <div class="chart-bar-group" id="chart-willingness">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Chart 2: Monthly Household Spend -->
+        <div class="analytics-card">
+          <div class="analytics-card-title">
+            <span>💰 Monthly Grocery Budget</span>
+          </div>
+          <div class="chart-bar-group" id="chart-spend">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Chart 3: Top Demanded Products -->
+        <div class="analytics-card">
+          <div class="analytics-card-title">
+            <span>🌾 Most Demanded Sourcing</span>
+          </div>
+          <div class="chart-bar-group" id="chart-products">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Chart 4: Current Grocery Pain Points -->
+        <div class="analytics-card">
+          <div class="analytics-card-title">
+            <span>⚠️ Key Retail Pain Points</span>
+          </div>
+          <div class="chart-bar-group" id="chart-problems">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <nav class="admin-nav-tabs" role="tablist">
+      <button id="tab-admin-residents" class="admin-tab-btn active" role="tab" aria-selected="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        Resident Survey Responses
+        <span class="tab-badge" id="badge-tab-residents">0</span>
+      </button>
+      <button id="tab-admin-wholesalers" class="admin-tab-btn" role="tab" aria-selected="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+        Wholesale Vendor Quotations
+        <span class="tab-badge" id="badge-tab-wholesalers">0</span>
+      </button>
+    </nav>
+
+    <!-- Residents View -->
+    <section id="residents-view">
+      <!-- Search & Filter Controls -->
+      <div class="table-controls">
+        <div class="search-box">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="admin-search" placeholder="Search by resident name, apartment, flat, or contact number...">
+        </div>
+        <div class="filters-group">
+          <!-- Apartment Filter -->
+          <select id="filter-apartment" class="admin-select">
+            <option value="ALL">All Communities / Apartments</option>
+          </select>
+
+          <!-- Willingness Filter -->
+          <select id="filter-willingness" class="admin-select">
+            <option value="ALL">All Willingness Levels</option>
+            <option value="Yes, Definitely">Yes, Definitely</option>
+            <option value="Maybe / Depends on Price & Quality">Maybe / Needs Details</option>
+            <option value="Not Interested">Not Interested</option>
+          </select>
+
+          <!-- Spending Filter -->
+          <select id="filter-spending" class="admin-select">
+            <option value="ALL">All Monthly Budgets</option>
+            <option value="Under ₹3,000">Under ₹3,000</option>
+            <option value="₹3,000 - ₹6,000">₹3,000 – ₹6,000</option>
+            <option value="₹6,000 - ₹10,000">₹6,000 – ₹10,000</option>
+            <option value="₹10,000 - ₹15,000">₹10,000 – ₹15,000</option>
+            <option value="Above ₹15,000">Above ₹15,000</option>
+          </select>
+
+          <span class="filter-count-label" id="residents-filter-count">Showing 0 records</span>
+        </div>
+      </div>
+
+      <!-- Data Table Card -->
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Date / Time</th>
+                <th>Apartment & Flat</th>
+                <th>Resident Contact</th>
+                <th>Willingness</th>
+                <th>Monthly Spend</th>
+                <th>Frequency</th>
+                <th>Delivery Pref</th>
+                <th>Monthly Trial</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="responses-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+        <div id="no-responses-state" class="empty-state hidden">
+          <div class="empty-state-icon">📋</div>
+          <h3>No survey responses found</h3>
+          <p>Responses submitted from the survey form will appear here in real time. Click "Demo Data" to preview sample records.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wholesalers View -->
+    <section id="wholesalers-view" class="hidden">
+      <!-- Wholesalers Search & Filter Controls -->
+      <div class="table-controls">
+        <div class="search-box">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="admin-ws-search" placeholder="Search by firm name, contact person, phone, godown location, GSTIN...">
+        </div>
+        <div class="filters-group">
+          <!-- GST Filter -->
+          <select id="filter-ws-gst" class="admin-select">
+            <option value="ALL">All GST Billing Types</option>
+            <option value="Tax Invoice">Regular B2B Tax Invoice</option>
+            <option value="Composition">Composition Scheme</option>
+            <option value="Challan">Delivery Challan / Cash Memo</option>
+          </select>
+
+          <!-- Quality Grade Filter -->
+          <select id="filter-ws-quality" class="admin-select">
+            <option value="ALL">All Quality Grades</option>
+            <option value="Sortex">Sortex Cleaned / Grade A</option>
+            <option value="Commercial">Commercial Grade B</option>
+            <option value="Standard">Standard Mandi Average</option>
+          </select>
+
+          <span class="filter-count-label" id="wholesalers-filter-count">Showing 0 quotations</span>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Wholesale Firm & Mandi</th>
+                <th>Contact Person</th>
+                <th>GST Compliance</th>
+                <th>FSSAI License</th>
+                <th>Quality & Moisture</th>
+                <th>Replacement Policy</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="wholesalers-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+        <div id="no-wholesalers-state" class="empty-state hidden">
+          <div class="empty-state-icon">🏢</div>
+          <h3>No wholesale quotations found</h3>
+          <p>Vendors submitting B2B quotations will appear here. Switch to the Wholesalers tab on the main page to submit a quotation.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Resident Detail Modal -->
+  <div id="resident-detail-modal" class="admin-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="resident-modal-title">
+    <div class="admin-modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-title-icon">👤</div>
+          <div>
+            <h2 class="modal-title" id="resident-modal-title">Resident Survey Submission</h2>
+            <div class="modal-subtitle" id="resident-modal-subtitle">Submitted on ...</div>
+          </div>
+        </div>
+        <button class="btn-modal-close" id="btn-close-resident-modal" title="Close">✕</button>
+      </div>
+
+      <div class="modal-body" id="resident-modal-content">
+        <!-- Dynamically injected -->
+      </div>
+
+      <div class="modal-footer">
+        <div style="display:flex; gap:0.65rem; align-items:center;">
+          <a href="#" id="resident-modal-wa-btn" target="_blank" class="admin-btn admin-btn-primary" style="background:#25d366; text-decoration:none;">
+            💬 Message on WhatsApp
+          </a>
+          <a href="#" id="resident-modal-call-btn" class="admin-btn admin-btn-secondary" style="text-decoration:none;">
+            📞 Call Resident
+          </a>
+        </div>
+        <button type="button" class="admin-btn admin-btn-secondary" id="btn-dismiss-resident-modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wholesaler Quotation Detail Modal -->
+  <div id="wholesaler-detail-modal" class="admin-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="wholesaler-modal-title">
+    <div class="admin-modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-title-icon">🏢</div>
+          <div>
+            <h2 class="modal-title" id="wholesaler-modal-title">Wholesale Vendor Quotation & Terms</h2>
+            <div class="modal-subtitle" id="wholesaler-modal-subtitle">Submitted on ...</div>
+          </div>
+        </div>
+        <button class="btn-modal-close" id="btn-close-ws-modal" title="Close">✕</button>
+      </div>
+
+      <div class="modal-body" id="wholesaler-modal-content">
+        <!-- Dynamically injected -->
+      </div>
+
+      <div class="modal-footer">
+        <div style="display:flex; gap:0.65rem; align-items:center;">
+          <a href="#" id="ws-modal-wa-btn" target="_blank" class="admin-btn admin-btn-primary" style="background:#25d366; text-decoration:none;">
+            💬 Forward via WhatsApp
+          </a>
+          <button type="button" id="ws-modal-print-btn" class="admin-btn admin-btn-print">
+            📄 Print Quotation
+          </button>
+        </div>
+        <button type="button" class="admin-btn admin-btn-secondary" id="btn-dismiss-ws-modal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Turso libSQL Cloud Database Settings Modal -->
+  <div id="turso-settings-modal" class="admin-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="turso-modal-title">
+    <div class="admin-modal-card" style="max-width: 680px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-title-icon" style="background:#0f172a; color:#38bdf8;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
+          </div>
+          <div>
+            <h2 class="modal-title" id="turso-modal-title">Turso Database Connection</h2>
+            <div class="modal-subtitle">Organization: <strong>kondareddy</strong> • libSQL HTTP Pipeline v2</div>
+          </div>
+        </div>
+        <button class="btn-modal-close" id="btn-close-turso-modal" title="Close">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 1.15rem 1.5rem 0.75rem;">
+        <!-- Turso Info Card -->
+        <div style="background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 0.9rem;">
+          <div style="display: flex; align-items: flex-start; gap: 0.65rem;">
+            <span style="font-size: 1.2rem; line-height: 1;">⚡</span>
+            <div style="font-size: 0.82rem; color: #134e4a; line-height: 1.45;">
+              <strong>Direct Browser-to-Turso Integration:</strong>
+              Your database at <a href="https://app.turso.tech/kondareddy" target="_blank" rel="noopener noreferrer" style="color: #0d9488; font-weight: 700; text-decoration: underline;">app.turso.tech/kondareddy</a> powers persistent SQL storage with zero backend servers required.
+            </div>
+          </div>
+        </div>
+
+        <form id="turso-config-form" onsubmit="return false;">
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label class="form-label required" for="turso-db-url" style="display: flex; justify-content: space-between; font-weight: 600; font-size: 0.82rem; margin-bottom: 0.35rem; color: #334155;">
+              <span>Turso Database URL / Endpoint</span>
+              <a href="https://app.turso.tech/kondareddy" target="_blank" rel="noopener noreferrer" style="font-size: 0.75rem; color: #0284c7; text-decoration: none; font-weight: 500;">Open Turso Dashboard ↗</a>
+            </label>
+            <input type="text" id="turso-db-url" placeholder="https://manamart-kondareddy.aws-ap-south-1.turso.io" style="width: 100%; padding: 0.58rem 0.85rem; border: 1.5px solid #cbd5e1; border-radius: 8px; font-family: monospace; font-size: 0.86rem; background: #ffffff;">
+            <small style="display: block; margin-top: 0.25rem; color: #64748b; font-size: 0.72rem;">
+              Format: <code>https://&lt;db-name&gt;-kondareddy.turso.io</code> or <code>libsql://...</code>
+            </small>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label class="form-label required" for="turso-auth-token" style="display: flex; justify-content: space-between; font-weight: 600; font-size: 0.82rem; margin-bottom: 0.35rem; color: #334155;">
+              <span>Database Auth Token (JWT)</span>
+              <span style="font-size: 0.73rem; color: #64748b; font-weight: normal;">Generate via Turso Dashboard</span>
+            </label>
+            <div style="position: relative; display: flex; align-items: center;">
+              <input type="password" id="turso-auth-token" placeholder="Paste your Turso token (eyJhbGciOiJFZERTQ...)" style="width: 100%; padding: 0.58rem 2.8rem 0.58rem 0.85rem; border: 1.5px solid #cbd5e1; border-radius: 8px; font-family: monospace; font-size: 0.86rem; background: #ffffff;">
+              <button type="button" id="btn-toggle-turso-token" title="Show/Hide token" style="position: absolute; right: 0.45rem; background: transparent; border: none; padding: 0.35rem 0.45rem; color: #64748b; cursor: pointer; font-size: 0.85rem;">
+                👁️
+              </button>
+            </div>
+            <small style="display: block; margin-top: 0.25rem; color: #64748b; font-size: 0.72rem;">
+              From <a href="https://app.turso.tech/kondareddy" target="_blank" rel="noopener noreferrer" style="color:#0284c7;">app.turso.tech/kondareddy</a> &gt; Click Database &gt; Generate Token.
+            </small>
+          </div>
+
+          <!-- Connection Status Box -->
+          <div id="turso-status-box" style="display: none; padding: 0.65rem 0.9rem; border-radius: 8px; margin-bottom: 0.85rem; font-size: 0.82rem;"></div>
+
+          <!-- Action Buttons in Modal Body -->
+          <div style="display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.35rem;">
+            <button type="button" id="btn-turso-test-save" class="admin-btn admin-btn-primary" style="width: 100%; justify-content: center; padding: 0.65rem 1rem; font-size: 0.9rem;">
+              ⚡ Test & Save Connection
+            </button>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.45rem;">
+              <button type="button" id="btn-turso-init-tables" class="admin-btn admin-btn-secondary" style="font-size: 0.78rem; padding: 0.5rem 0.4rem; justify-content: center;" title="Create survey_responses & wholesaler_quotations tables in Turso">
+                🏗️ Init Tables
+              </button>
+              <button type="button" id="btn-turso-push-local" class="admin-btn admin-btn-secondary" style="font-size: 0.78rem; padding: 0.5rem 0.4rem; justify-content: center;" title="Sync local / demo responses to Turso database">
+                ⬆️ Push Local
+              </button>
+              <button type="button" id="btn-turso-fetch-now" class="admin-btn admin-btn-secondary" style="font-size: 0.78rem; padding: 0.5rem 0.4rem; justify-content: center;" title="Pull latest responses from Turso to admin dashboard">
+                ⬇️ Pull Turso
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 1.5rem;">
+        <span style="font-size: 0.78rem; color: #64748b;">
+          Organization: <a href="https://app.turso.tech/kondareddy" target="_blank" rel="noopener noreferrer" style="color: #0284c7; font-weight: 600;">app.turso.tech/kondareddy</a>
+        </span>
+        <button type="button" class="admin-btn admin-btn-secondary" id="btn-dismiss-turso-modal">Done / Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Toast Notification -->
+  <div id="admin-toast" class="admin-toast-message" role="status" aria-live="polite"></div>
+
+  <!-- Turso libSQL Cloud Database Service -->
+  <script src="js/turso-config.js"></script>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics-compat.js"></script>
+
+  <!-- App Services -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
